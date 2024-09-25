@@ -72,15 +72,10 @@ app.post('/webhook', authenticateApiKey, (req, res) => {
 });
 */
 
-
-
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).send('OK');
 });
-
-
-
 
 // Start the server
 app.listen(config.port, () => {

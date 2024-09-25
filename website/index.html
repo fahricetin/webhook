@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webhook Visualizer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        #webhook-list { list-style-type: none; padding: 0; }
+        .webhook-item { background-color: #f0f0f0; margin-bottom: 10px; padding: 10px; border-radius: 5px; }
+        .webhook-time { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Webhook Visualizer</h1>
+    <ul id="webhook-list"></ul>
+
+    <script>
+        const webhookList = document.getElementById('webhook-list');
+        const ws = new WebSocket('ws://localhost:3010');
+
+        ws.onmessage = (event) => {
+            const webhooks = JSON.parse(event.data);
+            webhooks.forEach(webhook => {
+                const li = document.createElement('li');
+                li.className = 'webhook-item';
+                li.innerHTML = `
+                    <div class="webhook-time">${new Date(webhook.time).toLocaleString()}</div>
+                    <div>Type: ${webhook.type}</div>
+                    <div>Message: ${webhook.message}</div>
+                    <pre>${JSON.stringify(webhook, null, 2)}</pre>
+                `;
+                webhookList.insertBefore(li, webhookList.firstChild);
+
+                // Keep only the last 10 webhooks
+                if (webhookList.children.length > 10) {
+                    webhookList.removeChild(webhookList.lastChild);
+                }
+            });
+        };
+    </script>
+</body>
+</html>
