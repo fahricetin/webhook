@@ -1,25 +1,25 @@
 
 # create a new repository on the command line
 
-echo "# webhook" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/fahricetin/webhook.git
-git push -u origin main
+echo "# webhook" >> README.md  
+git init  
+git add README.md  
+git commit -m "first commit"  
+git branch -M main  
+git remote add origin https://github.com/fahricetin/webhook.git  
+git push -u origin main  
 
 # push an existing repository from the command line
-git remote add origin https://github.com/fahricetin/webhook.git
-git branch -M main
-git push -u origin main
+git remote add origin https://github.com/fahricetin/webhook.git  
+git branch -M main  
+git push -u origin main  
 
-# local testing
-mkdir webhook-app
-cd webhook-app
-npm init -y
-npm install express body-parser
-node app.js
+# local testing  
+mkdir webhook-app  
+cd webhook-app  
+npm init -y  
+npm install express body-parser  
+node app.js  
 # test without auth username and password or API key
 curl -X POST \
   -H "Content-Type: application/json" \
@@ -54,28 +54,11 @@ curl -X POST \
   "osDistro": "ubuntu",
   "runtime": "docker",
   "appID": "web-app-001",
-  "rule": "high-cpu-usage",
-  "message": "High CPU usage detected",
-  "aggregatedAlerts": 3,
-  "dropped": false,
-  "forensics": "cpu-profile-123.json",
-  "category": "performance",
-  "command": "nginx -g daemon off;",
-  "startupProcess": "/docker-entrypoint.sh nginx -g daemon off;",
-  "labels": ["env=prod", "app=web"],
-  "collections": ["web-servers", "production-apps"],
-  "complianceIssues": ["PCI-DSS-Req-6.2"],
-  "vulnerabilities": ["CVE-2023-1234"],
-  "clusters": ["prod-cluster-01"],
-  "namespaces": ["default"],
-  "accountIDs": ["123456789012"],
-  "user": "system",
   "incidentTime": "2023-05-24T10:29:55Z"
 }' \
   http://localhost:3000/webhook
 
-
   # create docker image
 
-  docker build -t mywebhook:1.0.0 ._
+  docker build -t mywebhook:1.0.0 .  
   docker run -d --name mywebhook -p 3000:3000 mywebhook:1.0.0
