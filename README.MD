@@ -21,7 +21,10 @@ npm init -y
 npm install express body-parser
 node app.js
 # test without auth username and password or API key
-curl -X POST -H "Content-Type: application/json" -d '{"event": "test", "data": "Hello, webhook!"}' http://localhost:3000/webhook
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"event": "test", "data": "Hello, webhook!"}' \
+  http://localhost:3000/webhook
 
 # test with API key auth
 curl -X POST \
@@ -74,5 +77,5 @@ curl -X POST \
 
   # create docker image
 
-  docker build -t mywebhook:1.0.0 .
+  docker build -t mywebhook:1.0.0 ._
   docker run -d --name mywebhook -p 3000:3000 mywebhook:1.0.0
