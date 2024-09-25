@@ -77,5 +77,5 @@ curl -X POST \
 
   # create docker image
 
-  docker build -t mywebhook:1.0.0 ._
+  docker build -t mywebhook:1.0.0 .  
   docker run -d --name mywebhook -p 3000:3000 mywebhook:1.0.0
